@@ -222,7 +222,6 @@ with open(local_csv, "r", encoding="utf-8") as f:
 
             batch = []
 
-# Final save - son kalan veriler için
 if batch:
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
         for result in executor.map(process_sha1, batch):
@@ -234,7 +233,6 @@ if batch:
                     found += 1
                     ndjson_lines.append(json.dumps(result))
 
-# Son chunk'ı kaydet - append mode
 if ndjson_lines or skipped or processed_log:
     chunk_num += 1
 
@@ -249,7 +247,6 @@ if ndjson_lines or skipped or processed_log:
     except:
         old_skipped = []
 
-    # Yeni veriyi ekle
     all_results = old_results + '\n'.join(ndjson_lines) if old_results else '\n'.join(ndjson_lines)
     all_skipped = old_skipped + skipped
 
