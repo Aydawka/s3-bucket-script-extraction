@@ -1,16 +1,11 @@
 -- Step 3: Revision → Root Directory
-
-CREATE TABLE default.revision_directory AS
+CREATE TABLE default.url_date_rev_2c AS
 SELECT
-    id AS revision_id,
-    directory AS directory_id
-FROM swh_graph_2025_10_08.revision;
+    b.url,
+    b.visit_date,
+    r.directory as directory_id
+FROM default.url_date_branch_2b b
+JOIN swh_graph_2025_10_08.revision r
+    ON b.revision_id = r.id;
 
-CREATE TABLE default.url_revision_directory AS
-SELECT
-    u.url,
-    u.visit_date,
-    rd.directory_id
-FROM default.url_date_branch u
-JOIN default.revision_directory rd
-    ON u.revision_id = rd.revision_id;
+

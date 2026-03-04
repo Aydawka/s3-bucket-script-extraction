@@ -11,11 +11,14 @@ WHERE target_type = 'revision'
       OR name = CAST('refs/heads/master' AS VARBINARY)
   );
 
-CREATE TABLE default.url_date_branch AS
+CREATE TABLE default.url_date_branch_2b AS
 SELECT
     u.url,
     u.visit_date,
     sbf.revision_id
-FROM default.url_and_date u
+FROM default.url_date_snapshot_2a u
 JOIN default.snapshot_branch_filtered sbf
     ON u.snapshot_id = sbf.snapshot_id;
+
+
+
